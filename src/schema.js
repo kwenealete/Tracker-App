@@ -24,7 +24,7 @@ type Query {
 }
 type Mutation {
     createUser(firstName: String!,lastName: String!, email: String!, password: String!): User!
-    createMeasurement( userId: Int!, weight: Float!): Measurement!
+    createMeasurement( userId: Int!,  weight: Float!): Measurement!
     deleteMeasurement( id: Int! ): Int!
     updateMeasurement( id: Int!, weight: Float!): [Int!]!
 }`;

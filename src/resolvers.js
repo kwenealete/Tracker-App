@@ -25,8 +25,8 @@ const resolvers = {
             });
         },
 
-        async createMeasurement (root, { userId, weight }, { models }) {
-            return models.Measurement.create({ userId, weight });
+        async createMeasurement (root, { userId, weight,  }, { models }) {
+            return models.Measurement.create({ userId, weight, });
         },
 
         async deleteMeasurement (root, { id }, { models }) {

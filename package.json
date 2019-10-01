@@ -15,6 +15,7 @@
     "apollo-server-express": "^2.9.4",
     "babel": "^6.23.0",
     "bcrypt": "^3.0.6",
+    "cors": "^2.8.5",
     "dependencies": "0.0.1",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
