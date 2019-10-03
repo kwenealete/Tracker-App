@@ -22,7 +22,7 @@ class AddMeasurement extends React.Component{
                 weight:parseFloat(this.state.weight)
             },
             refetchQueries: [{ query: getMeasurementsQuery }]
-        })
+        });
         
     }
     render() {

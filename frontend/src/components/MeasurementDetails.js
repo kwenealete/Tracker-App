@@ -25,7 +25,7 @@ class MeasurementDetails extends React.Component {
               )
           }else {
               return (
-                  <div>No book selected...</div>
+                  <div>No Measurement selected...</div>
               )
           }
       }      

@@ -1,5 +1,4 @@
 import React from 'react';
-// import {gql} from 'apollo-boost';
 import { graphql } from 'react-apollo';
 import {getMeasurementsQuery} from '../queries/queries';
 
@@ -24,11 +23,7 @@ class Measurement extends React.Component {
                         <td> {weight} </td>
                         <button  >edit</button>
                         <button>delete</button> 
-                    </tr>
-
-                    // <li key={measurement.id} > {measurement.weight}
-                    
-                    // </li>                    
+                    </tr>                   
                 )
             })
         }
@@ -38,14 +33,14 @@ class Measurement extends React.Component {
         <div>
             <h3>Your weight measurements</h3>
             <table>
-                <tbody>
+                <tbody id="measurement-list">
                                      
                     {this.displayMeasurements()}
                     
                 </tbody>
             </table>
             
-            {/* <ul id="measurement-lis">
+            {/* <ul id="measurement-list">
                 {this.displayMeasurements()}                
             </ul>            */}
         </div>
