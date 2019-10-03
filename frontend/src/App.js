@@ -15,7 +15,7 @@ class App extends React.Component {
     return (
       <ApolloProvider client={client} >
         <div className="App">
-          <h1>ninja reading lies</h1>
+          <h1>Weight Tracker Application</h1>
           <MeasurementList />
           <AddMeasurement />
           

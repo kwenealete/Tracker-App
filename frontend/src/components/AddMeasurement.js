@@ -1,9 +1,7 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
 import { getMeasurementsQuery } from '../queries/queries';
-
-import {createMeasurement } from '../queries/queries'
-
+import {createMeasurement } from '../queries/queries';
 
 
 class AddMeasurement extends React.Component{
