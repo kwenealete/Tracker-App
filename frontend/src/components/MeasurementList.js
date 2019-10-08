@@ -1,52 +1,33 @@
-import React from 'react';
-import { graphql } from 'react-apollo';
-import {getMeasurementsQuery} from '../queries/queries';
+import React, { Component } from 'react';
+import Measurement from './Measurement';
+import { getMeasurementsQuery } from '../queries/queries';
+import { Query } from 'react-apollo';
 
 
-class Measurement extends React.Component { 
-
-
-    
+class MeasurementList extends Component {
+    render() {
         
-    displayMeasurements() {
-        let data = this.props.data;
-        if(data.loading) {
-            return (<h2>Loading measurements...</h2>)
-        } else {
-            return data.getMeasurements.map(measurement => {
-                
-                const { id, weight } = measurement
-                return(
-                     
-                    <tr key={id} >
-                        
-                        <td> {weight} </td>
-                        <button  >edit</button>
-                        <button>delete</button> 
-                    </tr>                   
-                )
-            })
-        }
+        return(
+            <Query query={getMeasurementsQuery} >
+                {({ loading, error, data }) => {
+                    if (loading) return <div>Fetching Measurements</div>
+                    if (error) return <div>Error</div>
+
+                    const measurementsTorender = data.getMeasurements
+
+                    return (
+                        <div>
+                            <li>ID</li>
+                            <li>WEIGHT</li>
+                            <li>CREATED</li>
+                            <li>ACTION</li>
+                            { measurementsTorender.map(m => <Measurement key={m.id} measurement={m} />) }
+                        </div>
+                    )
+                }}
+            </Query>
+        )
     }
-  render() {     
-      return (
-        <div>
-            <h3>Your weight measurements</h3>
-            <table>
-                <tbody id="measurement-list">
-                                     
-                    {this.displayMeasurements()}
-                    
-                </tbody>
-            </table>
-            
-            {/* <ul id="measurement-list">
-                {this.displayMeasurements()}                
-            </ul>            */}
-        </div>
-      );
-  }
 }
 
-export default graphql(getMeasurementsQuery)(Measurement);
- 
+export default MeasurementList

@@ -1,50 +1,43 @@
-import React from 'react';
-import { graphql } from 'react-apollo';
-import { getMeasurementsQuery } from '../queries/queries';
-import {createMeasurement } from '../queries/queries';
+import React, { Component } from 'react';
+import { Mutation } from 'react-apollo';
+import { createMeasurement } from '../queries/queries';
 
+class AddMeasurement extends Component {
+  state = {
+    weight: '',
+    userId: '',
+  }
 
-class AddMeasurement extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            userId: 1,
-            weight: '',
-            
-        };
-    }
-
-    submitForm(e)  {
-        e.preventDefault();
-        this.props.createMeasurement({
-            variables: {
-                userId: parseInt(this.state.userId),
-                weight:parseFloat(this.state.weight)
-            },
-            refetchQueries: [{ query: getMeasurementsQuery }]
-        });
-        
-    }
-    render() {
-        return(
-            <form id="add-weight" onSubmit={this.submitForm.bind(this)} >
-                <div>
-                    <label>userId</label>
-                    <input placeholder="use 1 for userId" type="number" onChange={(e) => this.setState({userId:e.target.value})} />
-                </div>
-                <div>
-                    <label>weight</label>
-                    <input placeholder="enter weight" type="number" onChange={(e) =>this.setState({weight:e.target.value})} />
-                </div>
-                {/* <div>
-                    <label>createdAt</label>
-                    <input placeholder="yyyy-mm-dd" type="number" onChange = {(e) => this.setState({createdAt:e.target.value})} />
-                    
-                </div> */}
-                <button>Add weight</button>
-            </form>
-        )
-    }
+  render() {
+    const { weight, userId } = this.state
+    return (
+      <div>
+        <div className="flex flex-column mt3">
+          <input
+            className="mb2"
+            value={userId}
+            onChange={e => this.setState({ userId: e.target.value })}
+            type="text"
+            placeholder="UserId"
+          />
+          <input
+            className="mb2"
+            value={weight}
+            onChange={e => this.setState({ weight: e.target.value })}
+            type="text"
+            placeholder="Enter weight measurement"
+          />
+        </div>
+        <Mutation 
+            mutation={createMeasurement}
+            variables={{ weight: parseFloat(weight), userId: parseInt(userId) }}
+            onCompleted={() => this.props.history.push('/')}
+             >
+          { weightMutattion => <button onClick= {weightMutattion} >Add Weight</button> }
+        </Mutation>
+      </div>
+    )
+  }
 }
 
-export default graphql (createMeasurement, {name: 'createMeasurement'}) (AddMeasurement);
+export default AddMeasurement
